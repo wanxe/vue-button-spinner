@@ -5,9 +5,11 @@
 	class="btn-loader" 
 	:class="{'btn-loader-error': status == 'error', 'btn-loader-success': status == 'success'}">
 
-	<div v-if="isLoading && status == ''" class="spinner"></div>
-	<div v-if="status == 'success'" class="check"></div>
-	<div v-if="status == 'error'" class="cross"></div>
+	<transition name="fade" mode="out-in">
+		<div v-if="isLoading && status == ''" class="spinner"></div>
+		<div v-if="status == 'success'" class="check"></div>
+		<div v-if="status == 'error'" class="cross"></div>
+	</transition>
 
 	<slot v-if="status == ''"></slot>
 </button>
@@ -43,7 +45,11 @@
 </script>
 
 <style lang="css" scoped>
-	
+
+	.fade-enter-active, .fade-leave-active { transition: opacity 1s; }
+	.fade-enter, .fade-leave-active { opacity: 0; }
+
+
 	@-webkit-keyframes rotation {
 		from {
 			-webkit-transform: rotate(0deg)
@@ -84,24 +90,6 @@
 		}
 	}
 
-	.spinner {
-		height: 16px;
-		width: 16px;
-		margin-right: 2px;
-		opacity: 1;
-		filter: alpha(opacity=100);
-		-webkit-animation: rotation .7s infinite linear;
-		-moz-animation: rotation .7s infinite linear;
-		-o-animation: rotation .7s infinite linear;
-		animation: rotation .7s infinite linear;
-		border-left: 4px solid rgba(0,0,0,0.2);
-		border-right: 4px solid rgba(0,0,0,0.2);
-		border-bottom: 4px solid rgba(0,0,0,0.2);
-		border-top: 4px solid #9E9E9E;
-		border-radius: 100%;
-		transition: .3s all ease;
-	}
-
 	.btn {
 		display: inline-block;
 		font-weight: 400;
@@ -128,7 +116,35 @@
 
 	button.btn-loader-error { background-color: #F44336; }
 	button.btn-loader-success { background-color: #8BC34A; }
+	button.btn-loader:disabled { cursor: not-allowed; }
 
+	/**
+		Spinner Icon
+	**/
+
+	.spinner {
+		height: 16px;
+		width: 16px;
+		margin-right: 2px;
+		opacity: 1;
+		filter: alpha(opacity=100);
+		-webkit-animation: rotation .7s infinite linear;
+		-moz-animation: rotation .7s infinite linear;
+		-o-animation: rotation .7s infinite linear;
+		animation: rotation .7s infinite linear;
+		border-left: 4px solid rgba(0,0,0,0.2);
+		border-right: 4px solid rgba(0,0,0,0.2);
+		border-bottom: 4px solid rgba(0,0,0,0.2);
+		border-top: 4px solid #9E9E9E;
+		border-radius: 100%;
+		transition: .3s all ease;
+	}
+
+
+	/**
+		Check Icon
+	**/
+	
 	.check {
 		display:inline-block;
 		width: 22px;
@@ -159,6 +175,10 @@
 		left:8px;
 		top:12px;
 	}	
+
+	/**
+		Cross Icon
+	**/
 
 	.cross {
 		display: inline-block;
