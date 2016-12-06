@@ -47,7 +47,7 @@
 <style lang="css" scoped>
 
 	.fade-enter-active, .fade-leave-active { transition: opacity 1s; }
-	.fade-enter, .fade-leave-active { opacity: 0; }
+	.fade-enter, .fade-leave-active { opacity: 0; will-change: opacity;}
 
 
 	@-webkit-keyframes rotation {
@@ -138,6 +138,7 @@
 		border-top: 4px solid #9E9E9E;
 		border-radius: 100%;
 		transition: .3s all ease;
+
 	}
 
 
@@ -154,6 +155,8 @@
 		-ms-transform: rotate(45deg); 
 		-webkit-transform: rotate(45deg); 
 		transform: rotate(45deg);
+		will-change: transform;
+
 	}
 
 	.check:before{
@@ -199,10 +202,13 @@
 		-moz-transform: rotate(45deg);
 		-ms-transform: rotate(45deg);
 		transform: rotate(45deg);
+		will-change: transform;
 	}
 	.cross:after {
 		-moz-transform: rotate(-45deg);
 		-ms-transform: rotate(-45deg);
 		transform: rotate(-45deg);
+		will-change: transform;
+
 	}
 </style>

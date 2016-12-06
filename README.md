@@ -74,4 +74,4 @@ export default {
 
 # License
 
-MIT
+[MIT](https://github.com/wanxe/vue-button-spinner/blob/master/LICENSE)
