@@ -11,6 +11,10 @@
 - Add a custom html inside the component.
 - Pure CSS loaders, no fonts or images have been used.
 - Different styles for each state: loading, success, error.
+- Available props:
+    * 'isLoading' (boolean) to show the spinner
+    * 'status' (String | Boolean) allow 'success' or true and 'error' or false.
+- **Remember use the .native modifier for the events ([docs](https://vuejs.org/v2/guide/migration.html#Listening-for-Native-Events-on-Components-with-v-on-changed))**
 
 # Install
 
@@ -23,35 +27,33 @@
 [Your .vue component (vue-loader with webpack or use vue-cli projects)]
 ```js
 
-import ButtonSpinner from 'vue-button-spinner';
+import VueButtonSpinner from 'vue-button-spinner';
 
 export default {
 		name: 'events-form',
 		data() {
 			return {
-				isSubmitted: false,
-				isSent: false,
-				isValid: null,
-				status: ''
+				isLoading: false,
+				status: '',
 			}
 		},
 		components: {	
-			'button-spinner': ButtonSpinner
+			VueButtonSpinner
 		},
 		methods: {
 			onSubmit() {
+			    this.isLoading = true
 				$someRequest('/url', 'GET')
 				.then(response => {
-					this.isSent = true;
-					this.status = 'success';
+					this.isLoading = false
+					this.status = true // or success
+					setTimeout(() => { this.status = '' }, 2000) // to clear the status :)
 				})
 				.catch(error => {
-					console.error(error);
-					this.isSent = false;
-					this.status = 'error';
-				});
-
-				this.isSubmitted = true;
+					console.error(error)
+					this.isLoading = false
+					this.status = false //or error
+				})
 			}
 		}
 }
@@ -61,17 +63,11 @@ export default {
 [Your HTML code]
 ```html
 
-<button-spinner 
-	type="submit" 
-	class="btn btn-default" 
-	:isLoading="isSubmitted && !isSent" 
-	:disabled="isSent"
+<button-spinner
+	:isLoading="isLoading" 
+	:disabled="isLoading"
 	:status="status">
 	<span>Submit</span>
 </button-spinner>
 
 ```
-
-# License
-
-[MIT](https://github.com/wanxe/vue-button-spinner/blob/master/LICENSE)
