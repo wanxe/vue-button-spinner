@@ -20,7 +20,7 @@
         default: false
       },
       status: {
-        type: [String, Boolean],
+        type: String | Boolean,
         default: ''
       }
     },
