@@ -1,6 +1,6 @@
 {
   "name": "vue-button-spinner",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A simple button spinner.",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
     "loader"
   ],
   "author": "jnieto",
-  "license": "",
+  "license": "MIT",
   "main": "dist/vue-button-spinner.js",
   "dependencies": {
     "vue": "^2.5.2"

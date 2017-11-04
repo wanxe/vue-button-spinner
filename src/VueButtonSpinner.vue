@@ -1,10 +1,8 @@
 <template>
-    <button
-            class="vue-btn"
-            :class="{'vue-btn-loader-error': !isSuccess && !emptyStatus, 'vue-btn-loader-success': isSuccess, 'is-loading': isLoading}">
+    <button class="vue-btn" :class="getBackgroundClass">
 
         <transition name="fade" mode="out-in">
-            <div :class="{ 'spinner': loading, 'check': !emptyStatus && isSuccess && !loading, 'cross': !emptyStatus && !isSuccess && !loading }"></div>
+            <div :class="getSpinnerClass"></div>
         </transition>
 
         <slot v-if="showSlot"></slot>
@@ -20,11 +18,25 @@
         default: false
       },
       status: {
-        type: [String, Boolean],
+        type: String | Boolean,
         default: ''
       }
     },
     computed: {
+      getSpinnerClass () {
+        return {
+          'spinner': this.loading,
+          'check': !this.emptyStatus && this.isSuccess && !this.loading,
+          'cross': !this.emptyStatus && !this.isSuccess && !this.loading
+        }
+      },
+      getBackgroundClass () {
+        return {
+          'vue-btn-loader-error': !this.emptyStatus && !this.isSuccess,
+          'vue-btn-loader-success': this.isSuccess,
+          'is-loading': this.loading
+        }
+      },
       loading () {
         return this.isLoading
       },
@@ -32,10 +44,10 @@
         return this.status === 'success' || this.status === true
       },
       emptyStatus () {
-        return !this.status.length
+        return this.status === ''
       },
       showSlot () {
-        return this.isSuccess || this.loading || this.emptyStatus
+        return (this.loading) || (!this.loading && this.emptyStatus)
       }
     }
   }
@@ -43,12 +55,13 @@
 </script>
 
 <style lang="css" scoped>
-
-    .fade-enter-active, .fade-leave-active {
+    .fade-enter-active,
+    .fade-leave-active {
         transition: opacity 1s;
     }
 
-    .fade-enter, .fade-leave-active {
+    .fade-enter,
+    .fade-leave-active {
         opacity: 0;
         will-change: opacity;
     }
@@ -107,10 +120,13 @@
     }
 
     button.vue-btn-loader-error:not(.is-loading) {
+        width: 48px;
         background-color: #F44336;
+        color: #fff;
     }
 
     button.vue-btn-loader-success:not(.is-loading) {
+        width: 48px;
         background-color: #8BC34A;
         color: #fff;
     }
@@ -120,8 +136,8 @@
     }
 
     /**
-        Spinner Icon
-    **/
+          Spinner Icon
+      **/
 
     .spinner {
         height: 10px;
@@ -137,13 +153,13 @@
     }
 
     /**
-        Check Icon
-    **/
+          Check Icon
+      **/
 
     .check {
         display: inline-block;
-        width: 28px;
-        height: 17px;
+        width: 23px;
+        height: 24px;
         border-radius: 50%;
         transform: rotate(45deg);
         color: white;
@@ -171,8 +187,8 @@
     }
 
     /**
-        Cross Icon
-    **/
+          Cross Icon
+      **/
 
     .cross {
         display: inline-block;
@@ -181,7 +197,8 @@
         position: relative;
     }
 
-    .cross:before, .cross:after {
+    .cross:before,
+    .cross:after {
         position: absolute;
         left: 8px;
         content: ' ';
@@ -198,6 +215,6 @@
     .cross:after {
         transform: rotate(-45deg);
         will-change: transform;
-
     }
+
 </style>
