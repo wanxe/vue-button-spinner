@@ -64,7 +64,7 @@ export default {
 ```html
 
 <button-spinner
-	:isLoading="isLoading" 
+	:is-loading="isLoading" 
 	:disabled="isLoading"
 	:status="status">
 	<span>Submit</span>
