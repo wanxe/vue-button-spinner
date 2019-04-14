@@ -63,11 +63,11 @@ export default {
 [Your HTML code]
 ```html
 
-<button-spinner
+<vue-button-spinner
 	:is-loading="isLoading" 
 	:disabled="isLoading"
 	:status="status">
 	<span>Submit</span>
-</button-spinner>
+</vue-button-spinner>
 
 ```
