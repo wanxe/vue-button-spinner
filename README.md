@@ -30,32 +30,32 @@
 import VueButtonSpinner from 'vue-button-spinner';
 
 export default {
-		name: 'events-form',
-		data() {
-			return {
-				isLoading: false,
-				status: '',
-			}
-		},
-		components: {	
-			VueButtonSpinner
-		},
-		methods: {
-			onSubmit() {
-			    this.isLoading = true
-				$someRequest('/url', 'GET')
-				.then(response => {
-					this.isLoading = false
-					this.status = true // or success
-					setTimeout(() => { this.status = '' }, 2000) // to clear the status :)
-				})
-				.catch(error => {
-					console.error(error)
-					this.isLoading = false
-					this.status = false //or error
-				})
-			}
-		}
+  name: 'events-form',
+  data() {
+    return {
+      isLoading: false,
+      status: '',
+    }
+  },
+  components: {	
+    VueButtonSpinner
+  },
+  methods: {
+    onSubmit() {
+        this.isLoading = true
+      $someRequest('/url', 'GET')
+      .then(response => {
+        this.isLoading = false
+        this.status = true // or success
+        setTimeout(() => { this.status = '' }, 2000) // to clear the status :)
+      })
+      .catch(error => {
+        console.error(error)
+        this.isLoading = false
+        this.status = false //or error
+      })
+    }
+  }
 }
 
 ```
@@ -64,10 +64,10 @@ export default {
 ```html
 
 <vue-button-spinner
-	:is-loading="isLoading" 
-	:disabled="isLoading"
-	:status="status">
-	<span>Submit</span>
+  :is-loading="isLoading" 
+  :disabled="isLoading"
+  :status="status">
+  <span>Submit</span>
 </vue-button-spinner>
 
 ```
