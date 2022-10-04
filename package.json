@@ -29,8 +29,8 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "cross-env": "^5.2.0",
-    "css-loader": "^0.28.11",
-    "vue-loader": "^13.7.3",
+    "css-loader": "^6.7.1",
+    "vue-loader": "^17.0.0",
     "vue-template-compiler": "^2.5.17",
     "webpack": "^3.12.0"
   }
